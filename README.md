@@ -10,8 +10,8 @@ Buku “Panduan Praktis Untuk Pengembangan Aplikasi Keuangan Dengan Go Lang” m
 
 **Penulis 1 :** fedhira Syaila Putri Azzahra, lahir di kota Bekasi pada tanggal 16 Desember 2003. Pendidikan tingkat dasar hingga menengah ke atas di tempuh di Bekasi. Melanjutkan pendidikan D4 di Universitas Logistik dan Bisnis (ULBI) Bandung.
 
-![fedihra](https://github.com/billblis/bukpedp3_billblis/assets/93858982/f5a24b93-8f61-4976-9ee3-1f7dfe18c268)
+<img src = "https://github.com/billblis/bukpedp3_billblis/assets/93858982/f5a24b93-8f61-4976-9ee3-1f7dfe18c268" width="250" height="250" />
 
 **Penulis 2 :** Marlina Lubis, lahir di Laguboti pada tanggal 30 Agustus 2003. Pendidikan tingkat dasar hingga menengah dan atas di tempuh di Laguboti. Sekarang melanjutkan Pendidikan D4 di Universitas Logistik dan Bisnis Internasional (ULBI) Bandung.
 
-![marlina](https://github.com/billblis/bukpedp3_billblis/assets/93858982/68a6d33e-6729-44aa-80eb-91a9f2f4d93f)
+<img src = "https://github.com/billblis/bukpedp3_billblis/assets/93858982/68a6d33e-6729-44aa-80eb-91a9f2f4d93f" width="250" height="250" />
