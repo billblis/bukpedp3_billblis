@@ -1,0 +1,539 @@
+openapi: 3.0.3
+info:
+  title: Dokumen API Cloud Function - OpenAPI 3.0
+  description: |-
+    [Website Billblis](https://billblis.my.id).
+
+  termsOfService: https://github.com/billblis/swagger
+  contact:
+    email: pedirasyaila@gmail.com
+  license:
+    name: Billblis Package
+    url: https://pkg.go.dev/github.com/billblis/billblis_be
+  version: 0.2.902
+externalDocs:
+  description: Repo GCF
+  url: https://github.com/billblis/billblis_gcf
+servers:
+  - url: https://asia-southeast2-xenon-hawk-402203.cloudfunctions.net
+tags:
+  - name: User
+    description: Data User
+  - name: Auth
+    description: Auth to Access to API
+  - name: Pemasukan
+    description: Data Pemasukan User
+  - name: Pengeluaran
+    description: Data Pengeluaran User
+
+paths:
+  /getAllUser:
+    get:
+      tags:
+        - User
+      summary: Get All User
+      description: Get semua user
+      operationId: getAllUser
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+
+  /getUserFromUsername:
+    get:
+      tags:
+        - User
+      summary: Get user
+      description: Get user berdasarkan username
+      operationId: getUserFromUsername
+      parameters:
+        - name: username
+          in: query
+          description: "Masukkan username yang terdaftar."
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+
+  /signup:
+    post:
+      tags:
+        - User
+      summary: Signup User
+      description: Signup User
+      operationId: signup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+        "405":
+          description: Invalid input
+
+  /login:
+    post:
+      tags:
+        - Auth
+      summary: Login get Token
+      description: Login and Get User Token
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Auth"
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "405":
+          description: Invalid input
+      security:
+        - token:
+            - write: apiKey
+            - read: apiKey
+
+  /insertPemasukan:
+    post:
+      tags:
+        - Pemasukan
+      summary: Post Pemasukan
+      description: Insert Pemasukan
+      operationId: insertPemasukan
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pemasukan"
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "405":
+          description: Invalid input
+      security:
+        - token:
+            - write: apiKey
+            - read: apiKey
+
+  /getAllPemasukan:
+    get:
+      tags:
+        - Pemasukan
+      summary: Get All Pemasukan
+      description: Get semua Data
+      operationId: getPemasukan
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pemasukan"
+      security:
+        - token:
+            - write: apiKey
+            - read: apiKey
+
+  /getPemasukanFromID:
+    get:
+      tags:
+        - Pemasukan
+      summary: Get Pemasukan
+      description: Get Pemasukan berdasarkan ID
+      operationId: getPemasukanFromID
+      parameters:
+        - name: _id
+          in: query
+          description: "Masukkan _id yang terdaftar."
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pemasukan"
+      security:
+        - token:
+            - write: apiKey
+            - read: apiKey
+
+  /updatePemasukan:
+    put:
+      tags:
+        - Pemasukan
+      summary: Update Pemasukan
+      description: Update Pemasukan
+      operationId: updatePemasukan
+      parameters:
+        - name: _id
+          in: query
+          description: "Masukkan ID pemasukan yang ingin di update."
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pemasukan"
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PemasukanResponse"
+        "405":
+          description: Invalid input
+      security:
+        - token:
+            - write: apiKey
+            - read: apiKey
+
+  /deletePemasukan:
+    delete:
+      tags:
+        - Pemasukan
+      summary: Delete Pemasukan
+      description: Delete Pemasukan
+      operationId: deletePemasukan
+      parameters:
+        - name: _id
+          in: query
+          description: "Masukkan ID yang ingin di hapus."
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PemasukanResponse"
+        "405":
+          description: Invalid input
+      security:
+        - token:
+            - write: apiKey
+            - read: apiKey
+
+  /insertPengeluaran:
+    post:
+      tags:
+        - Pengeluaran
+      summary: Post Pengeluaran
+      description: Insert Pengeluaran
+      operationId: insertPengeluaran
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pengeluaran"
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "405":
+          description: Invalid input
+      security:
+        - token:
+            - write: apiKey
+            - read: apiKey
+
+  /getAllPengeluaran:
+    get:
+      tags:
+        - Pengeluaran
+      summary: Get All Pengeluaran
+      description: Get semua Data
+      operationId: getPengeluaran
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pengeluaran"
+      security:
+        - token:
+            - write: apiKey
+            - read: apiKey
+
+  /getPengeluaranFromID:
+    get:
+      tags:
+        - Pengeluaran
+      summary: Get Pengeluaran
+      description: Get Pengeluaran berdasarkan ID
+      operationId: getPengeluaranFromID
+      parameters:
+        - name: _id
+          in: query
+          description: "Masukkan _id yang terdaftar."
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pengeluaran"
+      security:
+        - token:
+            - write: apiKey
+            - read: apiKey
+
+  /updatePengeluaran:
+    put:
+      tags:
+        - Pengeluaran
+      summary: Update Pengeluaran
+      description: Update Pengeluaran
+      operationId: updatePengeluaran
+      parameters:
+        - name: _id
+          in: query
+          description: "Masukkan ID pengeluaran yang ingin di update."
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pengeluaran"
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PengeluaranResponse"
+        "405":
+          description: Invalid input
+      security:
+        - token:
+            - write: apiKey
+            - read: apiKey
+
+  /deletePengeluaran:
+    delete:
+      tags:
+        - Pengeluaran
+      summary: Delete Pengeluaran
+      description: Delete Pengeluaran
+      operationId: deletePengeluaran
+      parameters:
+        - name: _id
+          in: query
+          description: "Masukkan ID yang ingin di hapus."
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PengeluaranResponse"
+        "405":
+          description: Invalid input
+      security:
+        - token:
+            - write: apiKey
+            - read: apiKey
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        email:
+          type: string
+          example: renjun@gmail.com
+        username:
+          type: string
+          example: renjun
+        password:
+          type: string
+          example: secret
+
+    UserResponse:
+      type: object
+      properties:
+        status:
+          type: bool
+          example: false
+        message:
+          type: string
+          example: yellow
+        data:
+          type: object
+          properties:
+            email:
+              type: string
+            username:
+              type: string
+            password:
+              type: string
+
+    Pemasukan:
+      type: object
+      properties:
+        tanggal_masuk:
+          type: string
+          example: 02-12-2023
+        jumlah_masuk:
+          type: integer
+          example: 200000
+        sumber:
+          type: string
+          example: bisnis
+        deskripsi:
+          type: string
+          example: desain grafis
+
+    PemasukanResponse:
+      type: object
+      properties:
+        status:
+          type: bool
+          example: true
+        message:
+          type: string
+          example: yellow
+        data:
+          type: object
+          properties:
+            tanggal_masuk:
+              type: string
+              example: 02-12-2023
+            jumlah_masuk:
+              type: integer
+              example: 200000
+            sumber:
+              type: string
+              example: bisnis
+            deskripsi:
+              type: string
+              example: desain grafis
+
+    Pengeluaran:
+      type: object
+      properties:
+        tanggal_keluar:
+          type: string
+          example: 04-12-2023
+        jumlah_keluar:
+          type: integer
+          example: 10000
+        sumber:
+          type: string
+          example: konsumsi
+        deskripsi:
+          type: string
+          example: makan ayam
+
+    PengeluaranResponse:
+      type: object
+      properties:
+        status:
+          type: bool
+          example: true
+        message:
+          type: string
+          example: yellow
+        data:
+          type: object
+          properties:
+            tanggal_keluar:
+              type: string
+              example: 04-12-2023
+            jumlah_keluar:
+              type: integer
+              example: 10000
+            sumber:
+              type: string
+              example: konsumsi
+            deskripsi:
+              type: string
+              example: makan ayam
+
+    Auth:
+      type: object
+      properties:
+        username:
+          type: string
+          example: renjun
+        password:
+          type: string
+          example: secret
+
+    AuthResponse:
+      type: object
+      properties:
+        status:
+          type: bool
+          example: false
+        message:
+          type: string
+          example: yellow
+        token:
+          type: string
+          example: yellow
+
+  requestBodies:
+    AuthReq:
+      description: Request Authentication
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Auth"
+
+    UserArray:
+      description: List of user object
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/AuthResponse"
+
+  securitySchemes:
+    token:
+      type: apiKey
+      name: Authorization
+      in: header
